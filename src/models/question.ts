@@ -1,3 +1,5 @@
+import { guid } from '@/utils/uuid';
+
 export enum QuestionType {
   SINGLE_CHOICE = `SINGLE_CHOICE`,
   OPEN_QUESTION = `OPEN_QUESTION`,
@@ -14,6 +16,7 @@ export type Question = {
 };
 
 export type PublicQuestion = Omit<Question, 'correctAnswer'>;
+export type NewQuestion = Omit<Question, 'id'>;
 
 export type TQuestionDB = Record<string, Question>;
 
@@ -64,6 +67,12 @@ export class QuestionsModel {
   };
 
   getQuestion = (id: string): Question => {
+    return this.questionsDB[id];
+  };
+
+  createQuestion = (question: NewQuestion) => {
+    const id = guid();
+    this.questionsDB[id] = { id, ...question };
     return this.questionsDB[id];
   };
 

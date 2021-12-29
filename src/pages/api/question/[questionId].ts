@@ -1,22 +1,25 @@
+import {
+  handleDeleteQuestion,
+  handleGetQuestion,
+  handleVerifyQuestion,
+} from '@/handlers/question';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { QuestionsModel } from '../../../models/question';
 import { errorHandler, ErrorType } from '../../../utils/errors';
 
-const handleGetQuestion = async (req: NextApiRequest, res: NextApiResponse) => {
-  const questionId = req.query?.questionId?.toString();
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === `GET`) {
-    const question = QuestionsModel.getInstance().getQuestion(questionId);
-    res.status(200).json({ question });
+    return handleGetQuestion(req, res);
   }
 
   if (req.method === `DELETE`) {
-    const question = QuestionsModel.getInstance().getQuestion(questionId);
-    if (question) {
-      QuestionsModel.getInstance().deleteQuestion(questionId);
-      res.status(200).json({ questionId });
-    }
-    errorHandler(ErrorType.CAN_NOT_DELETE, res);
+    return handleDeleteQuestion(req, res);
   }
+
+  if (req.method === `POST`) {
+    return handleVerifyQuestion(req, res);
+  }
+
+  return errorHandler(ErrorType.NOT_FOUND, res);
 };
 
-export default handleGetQuestion;
+export default handler;
