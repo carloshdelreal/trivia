@@ -1,11 +1,16 @@
-import { QuestionsModel, Question, NewQuestion } from '@/models/question';
+import {
+  QuestionsModel,
+  Question,
+  PublicQuestion,
+  NewQuestion,
+} from '@/models/question';
 
 class Trivia {
   getQuestion(questionId: string): Question {
     return QuestionsModel.getInstance().getQuestion(questionId);
   }
 
-  getQuestions(): Question[] {
+  getQuestions(): PublicQuestion[] {
     return QuestionsModel.getInstance().getQuestions();
   }
 

@@ -62,8 +62,11 @@ export class QuestionsModel {
     return QuestionsModel.instance;
   }
 
-  getQuestions = (): Question[] => {
-    return Object.values(this.questionsDB);
+  getQuestions = (): PublicQuestion[] => {
+    return Object.values(this.questionsDB).map(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      ({ correctAnswer, ...rest }) => rest,
+    );
   };
 
   getQuestion = (id: string): Question => {

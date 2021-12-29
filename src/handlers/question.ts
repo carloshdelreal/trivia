@@ -70,7 +70,7 @@ export const handleVerifyQuestion = async (
   res: NextApiResponse,
 ) => {
   const questionId = req.query?.questionId?.toString();
-  const { answer } = JSON.parse(req.body);
+  const { answer } = req.body;
   const result = Trivia.verifyQuestion(questionId, answer);
 
   return res.status(200).json({ result });
