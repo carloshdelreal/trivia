@@ -4,6 +4,7 @@ import {
   PublicQuestion,
   NewQuestion,
 } from '@/models/question';
+import { TQuestionary, Questionary } from '@/models/questionary';
 
 class Trivia {
   getQuestion(questionId: string): Question {
@@ -33,6 +34,22 @@ class Trivia {
       return question.correctAnswer === answer;
     }
     return null;
+  }
+
+  getQuestionnaires(): TQuestionary[] {
+    return Questionary.getInstance().getQuestionnaires();
+  }
+
+  getQuestionary(id: string): TQuestionary {
+    return Questionary.getInstance().getQuestionary(id);
+  }
+
+  createQuestionary(questions: string[], subject: string[]): TQuestionary {
+    return Questionary.getInstance().createQuestionary(questions, subject);
+  }
+
+  addQuestion(questionaryId: string, questionId: string): TQuestionary | null {
+    return Questionary.getInstance().addQuestion(questionaryId, questionId);
   }
 }
 

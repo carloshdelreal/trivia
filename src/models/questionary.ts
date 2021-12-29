@@ -6,7 +6,7 @@ type Tag = {
   tag: string;
 };
 
-type TQuestionary = {
+export type TQuestionary = {
   id: string;
   questions: Array<Question['id']>;
   subject: Array<Tag['id']>;
@@ -36,18 +36,15 @@ export class Questionary {
     return Questionary.instance;
   }
 
-  getQuestionnaires = (): TQuestionary[] => {
+  getQuestionnaires(): TQuestionary[] {
     return Object.values(this.questionnaires);
-  };
+  }
 
-  getQuestionary = (id: string): TQuestionary => {
+  getQuestionary(id: string): TQuestionary {
     return this.questionnaires[id];
-  };
+  }
 
-  createQuestionary = (
-    questions: string[],
-    subject: string[],
-  ): TQuestionary => {
+  createQuestionary(questions: string[], subject: string[]): TQuestionary {
     const id = guid();
     this.questionnaires[id] = {
       id,
@@ -56,17 +53,14 @@ export class Questionary {
     };
 
     return this.questionnaires[id];
-  };
+  }
 
-  addQuestion = (
-    questionaryId: string,
-    questionId: string,
-  ): TQuestionary | null => {
+  addQuestion(questionaryId: string, questionId: string): TQuestionary | null {
     const questionary = this.questionnaires[questionaryId];
     if (questionary) {
       questionary.questions.push(questionId);
       return questionary;
     }
     return null;
-  };
+  }
 }

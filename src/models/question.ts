@@ -62,24 +62,24 @@ export class QuestionsModel {
     return QuestionsModel.instance;
   }
 
-  getQuestions = (): PublicQuestion[] => {
+  getQuestions(): PublicQuestion[] {
     return Object.values(this.questionsDB).map(
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       ({ correctAnswer, ...rest }) => rest,
     );
-  };
+  }
 
-  getQuestion = (id: string): Question => {
+  getQuestion(id: string): Question {
     return this.questionsDB[id];
-  };
+  }
 
-  createQuestion = (question: NewQuestion) => {
+  createQuestion(question: NewQuestion) {
     const id = guid();
     this.questionsDB[id] = { id, ...question };
     return this.questionsDB[id];
-  };
+  }
 
-  deleteQuestion = (id: string): boolean => {
+  deleteQuestion(id: string): boolean {
     return delete this.questionsDB[id];
-  };
+  }
 }
