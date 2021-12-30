@@ -12,6 +12,10 @@ const Card = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  &:hover {
+    -webkit-box-shadow: 2px 3px 17px 1px rgba(0, 0, 0, 0.72);
+    box-shadow: 2px 3px 17px 1px rgba(0, 0, 0, 0.72);
+  }
 `;
 
 const Title = styled.h1`
