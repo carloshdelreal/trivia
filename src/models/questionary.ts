@@ -40,7 +40,7 @@ export class Questionary {
     return Object.values(this.questionnaires);
   }
 
-  getQuestionary(id: string): TQuestionary {
+  getQuestionary(id: string): TQuestionary | undefined {
     return this.questionnaires[id];
   }
 

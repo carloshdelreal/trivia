@@ -41,7 +41,7 @@ class Trivia {
     return Questionary.getInstance().getQuestionnaires();
   }
 
-  getQuestionary(id: string): TQuestionary {
+  getQuestionary(id: string): TQuestionary | undefined {
     return Questionary.getInstance().getQuestionary(id);
   }
 
@@ -53,8 +53,17 @@ class Trivia {
     return Questionary.getInstance().addQuestion(questionaryId, questionId);
   }
 
-  createGame(questionary_id: string, questionsNumber: number): TGame {
-    return Game.getInstance().createGame(questionary_id, questionsNumber);
+  createGame(questionary_id: string): TGame | null {
+    const questionary =
+      Questionary.getInstance().getQuestionary(questionary_id);
+    if (questionary) {
+      return Game.getInstance().createGame(
+        questionary_id,
+        questionary.questions.length,
+      );
+    }
+
+    return null;
   }
 
   updateAnswers(game_id: string, answers: Answer[]): TGame | null {

@@ -33,9 +33,14 @@ export class Game {
     return Game.instance;
   }
 
-  gameFinished(game_id: string): boolean {
+  gameFinished(game_id: string): boolean | null {
     const now = new Date();
-    return this.games[game_id].due > now;
+    const game = this.games[game_id];
+    if (game) {
+      return this.games[game_id]?.due > now;
+    }
+
+    return null;
   }
 
   createGame(questionary_id: string, questionsNumber: number): TGame {
@@ -92,10 +97,20 @@ export class Game {
   }
 
   getScore(game_id: string): number | null {
-    return this.games[game_id].score;
+    const game = this.games[game_id];
+    if (game) {
+      return game.score;
+    }
+
+    return null;
   }
 
-  getGame(game_id: string): TGame {
-    return this.games[game_id];
+  getGame(game_id: string): TGame | null {
+    const game = this.games[game_id];
+    if (game) {
+      return game;
+    }
+
+    return null;
   }
 }
