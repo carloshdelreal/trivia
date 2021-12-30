@@ -37,7 +37,7 @@ export class Game {
     const now = new Date();
     const game = this.games[game_id];
     if (game) {
-      return this.games[game_id]?.due > now;
+      return this.games[game_id]?.due < now;
     }
 
     return null;

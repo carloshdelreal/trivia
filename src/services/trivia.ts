@@ -113,7 +113,10 @@ class Trivia {
       },
     );
 
-    const score = results.correctAnswers / results.answers.length;
+    const score =
+      results.correctAnswers > 0
+        ? results.correctAnswers / results.answers.length
+        : 0;
 
     return Game.getInstance().summarize(
       game_id,
