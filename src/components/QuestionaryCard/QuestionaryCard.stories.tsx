@@ -1,4 +1,4 @@
-import { TQuestionary } from '../models/questionary';
+import { TQuestionary } from '../../models/questionary';
 import { Story } from '@storybook/react';
 import React from 'react';
 
