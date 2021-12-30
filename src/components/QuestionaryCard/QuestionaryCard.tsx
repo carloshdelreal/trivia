@@ -1,5 +1,6 @@
 import { TQuestionary } from '@/models/questionary';
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React from 'react';
 import styled from 'styled-components';
 import { Theme } from '../../utils/theme';
 
@@ -48,8 +49,14 @@ export const QuestionaryCard: React.FC<TQuestionary> = ({
   questions,
   subject,
 }) => {
+  const router = useRouter();
+
+  const goToGame = async (game_id: string) => {
+    await router.push(`trivia/${game_id}`);
+  };
+
   return (
-    <Card>
+    <Card onClick={() => goToGame(id)}>
       <Title>{name}</Title>
       <TitleDescription>
         <DarkerSpan>id:</DarkerSpan>

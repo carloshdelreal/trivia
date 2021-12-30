@@ -34,7 +34,7 @@ export class Questionary {
         subject: [`trivia`],
       },
       ccc: {
-        id: `ddd`,
+        id: `ccc`,
         name: `Interesting Trivia`,
         questions: [`111`, `222`, `333`],
         subject: [`trivia`],
