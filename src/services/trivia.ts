@@ -79,6 +79,10 @@ class Trivia {
     return false;
   }
 
+  endGame(game_id: string): TGame | null {
+    return Game.getInstance().endGame(game_id);
+  }
+
   summaryGame(game_id: string): TGame | GameSummaryResponses {
     const game = Game.getInstance().getGame(game_id);
 

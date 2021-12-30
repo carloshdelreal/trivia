@@ -113,4 +113,14 @@ export class Game {
 
     return null;
   }
+
+  endGame(game_id: string): TGame | null {
+    const game = this.games[game_id];
+    if (game) {
+      const now = new Date();
+      game.due = now;
+      return { ...game };
+    }
+    return null;
+  }
 }

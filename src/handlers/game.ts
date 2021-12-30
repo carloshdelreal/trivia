@@ -36,6 +36,25 @@ export const handleUpdateAnswers = async (
   return errorHandler(ErrorType.BAD_REQUEST, res);
 };
 
+/**
+ * handle end Game
+ */
+export const handlerEndGame = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+) => {
+  const gameId = req.query?.gameId?.toString();
+  const game = Trivia.endGame(gameId);
+  if (game) {
+    return res.status(200).json({ game });
+  }
+
+  return errorHandler(ErrorType.NOT_FOUND, res);
+};
+
+/**
+ * handle game summary, game summary can only be retrieved on a finished game aka. due < now
+ */
 export const handlerGameSummary = async (
   req: NextApiRequest,
   res: NextApiResponse,
