@@ -8,6 +8,7 @@ type Tag = {
 
 export type TQuestionary = {
   id: string;
+  name: string;
   questions: Array<Question['id']>;
   subject: Array<Tag['id']>;
 };
@@ -22,6 +23,7 @@ export class Questionary {
     this.questionnaires = {
       aaa: {
         id: `aaa`,
+        name: `Interesting Trivia`,
         questions: [`111`, `222`, `333`],
         subject: [`trivia`],
       },

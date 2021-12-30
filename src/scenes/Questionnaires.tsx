@@ -12,8 +12,15 @@ export const Questionnaires = () => {
       <h1>Trivia</h1>
       <h3>Questionnaires</h3>
       {questionnaires?.map((q) => (
-        <QuestionaryCard key={q.id} id={q.id} questions={[]} subject={[]} />
+        <QuestionaryCard
+          key={q.id}
+          id={q.id}
+          questions={[]}
+          subject={[]}
+          name={``}
+        />
       ))}
+      <QuestionaryCard id={`123`} questions={[]} subject={[]} name={`Cool`} />
     </div>
   );
 };

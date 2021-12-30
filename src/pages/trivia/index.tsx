@@ -1,3 +1,3 @@
-import { Questionnaires } from '../../scenes/Questionaires';
+import { Questionnaires } from '../../scenes/Questionnaires';
 
 export default Questionnaires;
