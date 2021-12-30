@@ -1,6 +1,7 @@
 import { Trivia } from '@/services/trivia';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { errorHandler, ErrorType } from '../utils/errors';
+import { GameSummaryResponses } from '@/common';
 
 /**
  * create game handler, it takes questionary_id from body
@@ -40,10 +41,13 @@ export const handlerGameSummary = async (
   res: NextApiResponse,
 ) => {
   const gameId = req.query?.gameId?.toString();
-  const game = Trivia.summaryGame(gameId);
-  if (game) {
-    return res.status(200).json({ game });
+  const gameResponse = Trivia.summaryGame(gameId);
+
+  if (gameResponse == GameSummaryResponses.GAME_DOES_NOT_EXIST) {
+    return errorHandler(ErrorType.GAME_DOES_NOT_EXIST, res);
+  } else if (gameResponse == GameSummaryResponses.GAME_IN_PROGRESS) {
+    return errorHandler(ErrorType.GAME_IN_PROGRESS, res);
   }
 
-  return errorHandler(ErrorType.BAD_REQUEST, res);
+  return res.status(200).json({ game: gameResponse });
 };

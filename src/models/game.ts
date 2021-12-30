@@ -108,7 +108,7 @@ export class Game {
   getGame(game_id: string): TGame | null {
     const game = this.games[game_id];
     if (game) {
-      return game;
+      return { ...game };
     }
 
     return null;
