@@ -23,10 +23,12 @@ const Game = () => {
 
   const [game, setGame] = useState<TGame | null>(null);
   const [questions, setQuestions] = useState<PublicQuestion[] | null>(null);
+  const [summary, setSummary] = useState<TGame | null>(null);
   const [questionary, setQuestionary] = useState<TQuestionary | null>(null);
 
   const startGame = () => {
     // create game
+    setSummary(null);
     setGameOverFlag(false);
     if (!questionnaireId) return;
     (async () => {
@@ -41,6 +43,16 @@ const Game = () => {
       }
       setLoadingGame(false);
     })();
+  };
+
+  const getGameSummary = async () => {
+    if (!game) return;
+    try {
+      const { data } = await axios.get<{ game: TGame }>(`/api/game/${game.id}`);
+      setSummary(data.game);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   const gameOver = () => {
@@ -84,6 +96,9 @@ const Game = () => {
 
   return (
     <TriviaMainContainer subtitle={`Game`}>
+      {gameOverFlag && (
+        <button onClick={() => getGameSummary()}> Game Summary</button>
+      )}
       {questionary && <Questionary {...questionary} startGame={startGame} />}
       {!loadingGame && game && <TriviaGame {...game} gameOver={gameOver} />}
       {questions && game && (
@@ -91,6 +106,7 @@ const Game = () => {
           questions={questions}
           gameId={game.id}
           gameOverFlag={gameOverFlag}
+          summary={summary}
         />
       )}
     </TriviaMainContainer>

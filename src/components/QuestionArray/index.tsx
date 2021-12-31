@@ -42,12 +42,14 @@ interface IQuestionArray {
   questions: PublicQuestion[];
   gameId: string;
   gameOverFlag: boolean;
+  summary: TGame | null;
 }
 
 export const QuestionArray: React.FC<IQuestionArray> = ({
   questions,
   gameId,
   gameOverFlag,
+  summary,
 }) => {
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [submittedAnswers, setSubmittedAnswers] = useState<
@@ -91,6 +93,17 @@ export const QuestionArray: React.FC<IQuestionArray> = ({
       setSubmittedAnswers({});
     }
   }, [gameOverFlag]);
+
+  // Game summary adds correct answers
+  useEffect(() => {
+    if (summary) {
+      const newState = { ...answers };
+      summary.answers.forEach((q) => {
+        newState[q.question_id] = q;
+      });
+      setAnswers(newState);
+    }
+  }, [summary]);
   return (
     <QuestionArrayContainer>
       <QuestionsTitle>Questions</QuestionsTitle>
@@ -102,6 +115,7 @@ export const QuestionArray: React.FC<IQuestionArray> = ({
             selectedChoice={answers[q.id]?.answer}
             setSelectedChoice={selectAnswer}
             submittedChoice={submittedAnswers[q.id]?.answer}
+            correct={answers[q.id]?.correct}
           />
         ))}
       </div>

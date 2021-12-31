@@ -37,12 +37,18 @@ const ChoicesStyle = styled.div`
       border: 3px solid;
       border-color: ${Theme.color.primaryLight};
     `}
+  ${(props: { correct: boolean }) =>
+    props.correct &&
+    css`
+      border-color: green;
+    `}
 `;
 
 interface IQuestionComponent {
   selectedChoice: string;
   submittedChoice: string;
   setSelectedChoice: (id: string, c: string) => void;
+  correct: boolean | undefined;
 }
 
 export const QuestionComponent: React.FC<
@@ -54,6 +60,7 @@ export const QuestionComponent: React.FC<
   selectedChoice,
   submittedChoice,
   setSelectedChoice,
+  correct,
 }) => {
   // TODO type could be used to manage other question types
   const choicesArray = useMemo(
@@ -69,6 +76,7 @@ export const QuestionComponent: React.FC<
           onClick={() => setSelectedChoice(id, c)}
           selected={c === selectedChoice}
           submitted={c === submittedChoice}
+          correct={correct}
         >
           {index + 1}. {c}
         </ChoicesStyle>
