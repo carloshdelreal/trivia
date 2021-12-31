@@ -5,6 +5,7 @@ export enum ErrorType {
   NOT_FOUND = `NOT_FOUND`,
   BAD_REQUEST = `BAD_REQUEST`,
   GAME_DOES_NOT_EXIST = `GAME_DOES_NOT_EXIST`,
+  GAME_DOES_NOT_EXIST_OR_FINISHED = `GAME_DOES_NOT_EXIST_OR_FINISHED`,
   GAME_IN_PROGRESS = `GAME_IN_PROGRESS`,
 }
 type error = {
@@ -24,6 +25,10 @@ const errors: Record<ErrorType, error> = {
   GAME_DOES_NOT_EXIST: {
     error: 404,
     message: `the  game your are looking for does not exist`,
+  },
+  GAME_DOES_NOT_EXIST_OR_FINISHED: {
+    error: 404,
+    message: `the  game your are looking for does not exist or already has finished`,
   },
   BAD_REQUEST: {
     error: 404,

@@ -22,6 +22,13 @@ const GameTitle = styled.div`
   font-weight: 800;
 `;
 
+const Footer = styled.div`
+  height: 50vh;
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+`;
+
 interface TMC {
   subtitle: string;
 }
@@ -34,6 +41,7 @@ export const TriviaMainContainer: React.FC<TMC> = ({ children, subtitle }) => {
       <GameTitle onClick={() => router.push(`/trivia`)}>Trivia</GameTitle>
       <Subtitle>{subtitle}</Subtitle>
       {children}
+      <Footer> Developed by: Carlos Del Real </Footer>
     </MainContainer>
   );
 };

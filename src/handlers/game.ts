@@ -33,7 +33,7 @@ export const handleUpdateAnswers = async (
     return res.status(200).json({ game });
   }
 
-  return errorHandler(ErrorType.BAD_REQUEST, res);
+  return errorHandler(ErrorType.GAME_DOES_NOT_EXIST_OR_FINISHED, res);
 };
 
 /**

@@ -46,6 +46,26 @@ class Trivia {
     return Questionary.getInstance().getQuestionary(id);
   }
 
+  async getQuestionnaireQuestions(
+    questionnaireId: string,
+  ): Promise<PublicQuestion[] | null> {
+    const questionary =
+      Questionary.getInstance().getQuestionary(questionnaireId);
+    if (questionary) {
+      const questions = Promise.all(
+        questionary?.questions.map((q) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { correctAnswer, ...question } =
+            QuestionsModel.getInstance().getQuestion(q);
+          return question;
+        }),
+      );
+      return questions;
+    }
+
+    return null;
+  }
+
   createQuestionary(questions: string[], subject: string[]): TQuestionary {
     return Questionary.getInstance().createQuestionary(questions, subject);
   }

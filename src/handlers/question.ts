@@ -19,13 +19,25 @@ export const handleGetQuestion = async (
 };
 
 /**
- * get questions
+ * get all the questions of the DB
+ */
+export const handleGetQuestionsAll = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+) => {
+  const questions = Trivia.getQuestions();
+  return res.status(200).json({ questions });
+};
+
+/**
+ * get questions by questionaireId
  */
 export const handleGetQuestions = async (
   req: NextApiRequest,
   res: NextApiResponse,
 ) => {
-  const questions = Trivia.getQuestions();
+  const Id = req.query?.questionnaireId?.toString();
+  const questions = await Trivia.getQuestionnaireQuestions(Id);
   return res.status(200).json({ questions });
 };
 
@@ -38,7 +50,6 @@ export const handleDeleteQuestion = async (
 ) => {
   const questionId = req.query?.questionId?.toString();
   const question = Trivia.getQuestion(questionId);
-  console.log(question);
   if (question) {
     Trivia.deleteQuestion(questionId);
     return res.status(200).json({ questionId });

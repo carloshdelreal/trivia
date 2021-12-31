@@ -64,7 +64,7 @@ export class Game {
         ...this.games[game_id],
         answers,
       };
-      return this.games[game_id];
+      return { ...this.games[game_id] };
     }
 
     return null;
