@@ -131,7 +131,7 @@ class Trivia {
         }
         acc.answers.push({
           ...a,
-          correct: true,
+          correct: correct ? true : false,
         });
 
         return acc;
