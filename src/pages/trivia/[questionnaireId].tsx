@@ -22,7 +22,7 @@ const GameSummaryBtn = styled.button`
   margin: 1rem;
   margin-bottom: 0;
 
-  @keyframes glow {
+  @keyframes glowSummary {
     from {
       background-color: ${Theme.color.primaryLight};
     }
@@ -34,7 +34,7 @@ const GameSummaryBtn = styled.button`
   ${(props: { clicked: boolean }) =>
     !props.clicked &&
     css`
-      animation: glow 1s infinite;
+      animation: glowSummary 1s infinite;
     `}
 `;
 
@@ -76,6 +76,7 @@ const Game = () => {
     try {
       const { data } = await axios.get<{ game: TGame }>(`/api/game/${game.id}`);
       setSummary(data.game);
+      setGame(data.game);
     } catch (error) {
       console.error(error.message);
     }
@@ -83,6 +84,16 @@ const Game = () => {
 
   const gameOver = () => {
     setGameOverFlag(true);
+  };
+
+  const endGame = async () => {
+    if (!game) return;
+    try {
+      await axios.delete(`/api/game/${game.id}`);
+      gameOver();
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   // get questionnaire
@@ -122,7 +133,9 @@ const Game = () => {
   return (
     <TriviaMainContainer subtitle={`Game`}>
       {questionary && <Questionary {...questionary} startGame={startGame} />}
-      {!loadingGame && game && <TriviaGame {...game} gameOver={gameOver} />}
+      {!loadingGame && game && (
+        <TriviaGame {...game} gameOver={gameOver} gameOverFlag={gameOverFlag} />
+      )}
       {gameOverFlag && (
         <GameSummaryBtn
           onClick={() => getGameSummary()}
@@ -137,6 +150,7 @@ const Game = () => {
           gameId={game.id}
           gameOverFlag={gameOverFlag}
           summary={summary}
+          endGame={endGame}
         />
       )}
     </TriviaMainContainer>

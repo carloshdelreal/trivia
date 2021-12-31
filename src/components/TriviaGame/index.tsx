@@ -11,13 +11,21 @@ const Timer = styled.h3`
   background-color: white;
   color: black;
   padding: 1rem;
-  display: flex;
+  display: block;
   margin: 0;
   padding: 0;
 `;
 
 const CountDown = styled(Timer)`
   justify-content: end;
+  display: block;
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 `;
 
 const Time = styled.span`
@@ -25,8 +33,43 @@ const Time = styled.span`
   font-size: larger;
 `;
 
+const TimeIsUpTitle = styled.span`
+  color: ${Theme.color.primary};
+  font-size: larger;
+`;
+
+const YouCan = styled.span`
+  color: ${Theme.color.primaryLight};
+  animation: glow 1s infinite;
+
+  @keyframes glow {
+    from {
+      color: ${Theme.color.primaryLight};
+    }
+
+    to {
+      color: ${Theme.color.primary};
+    }
+  }
+`;
+
+const Perfect = styled.span`
+  color: green;
+  animation: glow 1s infinite;
+
+  @keyframes glow {
+    from {
+      color: green;
+    }
+
+    to {
+      color: ${Theme.color.primary};
+    }
+  }
+`;
 interface GameOver {
   gameOver: () => void;
+  gameOverFlag: boolean;
 }
 
 export const TriviaGame: React.FC<TGame & GameOver> = ({
@@ -35,6 +78,7 @@ export const TriviaGame: React.FC<TGame & GameOver> = ({
   score,
   due,
   gameOver,
+  gameOverFlag,
 }) => {
   const getRemainingSeconds = useCallback((): number => {
     return Math.ceil((new Date(due).getTime() - new Date().getTime()) / 1000);
@@ -60,17 +104,36 @@ export const TriviaGame: React.FC<TGame & GameOver> = ({
     };
   }, [due, gameOver, getRemainingSeconds, time, timeIsUp]);
 
+  useEffect(() => {
+    if (gameOverFlag) {
+      setTimeIsUp(true);
+    }
+  }, [gameOverFlag]);
+
   return (
     <TimerContainer>
-      <Timer>GameId: {id}</Timer>
-      {correctAnswers ?? <Timer>{correctAnswers}</Timer>}
-      {score ?? <Timer>{score}</Timer>}
-      <CountDown>
-        <Time>
-          {time} {!timeIsUp && <span> s</span>}
-        </Time>
-        {timeIsUp && <span>&nbsp;Time is up!</span>}
-      </CountDown>
+      <FlexContainer>
+        <Timer>GameId: {id}</Timer>
+        <CountDown>
+          {!gameOverFlag && (
+            <Time>
+              {time} {!timeIsUp && <span> s</span>}
+            </Time>
+          )}
+          {timeIsUp && <TimeIsUpTitle>&nbsp;Time is up!</TimeIsUpTitle>}
+        </CountDown>
+      </FlexContainer>
+      {correctAnswers ? <Timer>Correct answers: {correctAnswers}</Timer> : null}
+      {score ? (
+        <Timer>
+          Score: {score}
+          {score === 1 ? (
+            <Perfect> Perfect!!</Perfect>
+          ) : (
+            <YouCan> You can do it better</YouCan>
+          )}
+        </Timer>
+      ) : null}
     </TimerContainer>
   );
 };

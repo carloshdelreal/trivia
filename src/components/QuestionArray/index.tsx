@@ -43,6 +43,7 @@ interface IQuestionArray {
   gameId: string;
   gameOverFlag: boolean;
   summary: TGame | null;
+  endGame: () => void;
 }
 
 export const QuestionArray: React.FC<IQuestionArray> = ({
@@ -50,6 +51,7 @@ export const QuestionArray: React.FC<IQuestionArray> = ({
   gameId,
   gameOverFlag,
   summary,
+  endGame,
 }) => {
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [submittedAnswers, setSubmittedAnswers] = useState<
@@ -126,7 +128,7 @@ export const QuestionArray: React.FC<IQuestionArray> = ({
               Submit Questions
             </ButtonPrimary>
           )}
-          <ButtonSecondary>End Game</ButtonSecondary>
+          <ButtonSecondary onClick={() => endGame()}>End Game</ButtonSecondary>
         </ButtonContainer>
       )}
     </QuestionArrayContainer>
