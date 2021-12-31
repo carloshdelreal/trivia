@@ -29,6 +29,11 @@ const ChoicesStyle = styled.div`
   ${(props: { selected: boolean }) =>
     props.selected &&
     css`
+      background-color: lightgrey;
+    `}
+  ${(props: { submitted: boolean }) =>
+    props.submitted &&
+    css`
       border: 3px solid;
       border-color: ${Theme.color.primaryLight};
     `}
@@ -36,12 +41,20 @@ const ChoicesStyle = styled.div`
 
 interface IQuestionComponent {
   selectedChoice: string;
+  submittedChoice: string;
   setSelectedChoice: (id: string, c: string) => void;
 }
 
 export const QuestionComponent: React.FC<
   PublicQuestion & IQuestionComponent
-> = ({ id, question, choices, selectedChoice, setSelectedChoice }) => {
+> = ({
+  id,
+  question,
+  choices,
+  selectedChoice,
+  submittedChoice,
+  setSelectedChoice,
+}) => {
   // TODO type could be used to manage other question types
   const choicesArray = useMemo(
     () => shuffleArray(JSON.parse(choices)),
@@ -55,6 +68,7 @@ export const QuestionComponent: React.FC<
           key={c}
           onClick={() => setSelectedChoice(id, c)}
           selected={c === selectedChoice}
+          submitted={c === submittedChoice}
         >
           {index + 1}. {c}
         </ChoicesStyle>

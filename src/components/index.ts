@@ -5,3 +5,4 @@ export * from './Styled';
 export * from './TriviaGame';
 export * from './QuestionArray';
 export * from './QuestionComponent';
+export * from './Questionary';
