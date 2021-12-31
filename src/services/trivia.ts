@@ -142,9 +142,13 @@ class Trivia {
       },
     );
 
+    // get questionary to get the answers length
+    const questionary = Questionary.getInstance().getQuestionary(
+      game.questionary_id,
+    );
     const score =
       results.correctAnswers > 0
-        ? results.correctAnswers / results.answers.length
+        ? results.correctAnswers / (questionary?.questions.length || 0)
         : 0;
 
     return Game.getInstance().summarize(
