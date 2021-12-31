@@ -91,6 +91,11 @@ class Trivia {
     return Game.getInstance().updateAnswers(game_id, answers);
   }
 
+  gameExists(game_id: string): boolean {
+    if (Game.getInstance().getGame(game_id)) return true;
+    return false;
+  }
+
   gameFinished(game_id: string): boolean {
     if (Game.getInstance().gameFinished(game_id)) {
       return true;

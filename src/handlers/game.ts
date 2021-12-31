@@ -28,12 +28,15 @@ export const handleUpdateAnswers = async (
 ) => {
   const gameId = req.query?.gameId?.toString();
   const { answers } = req.body;
+  if (!Trivia.gameExists(gameId))
+    return errorHandler(ErrorType.GAME_DOES_NOT_EXIST, res);
+
   const game = Trivia.updateAnswers(gameId, answers);
   if (game) {
     return res.status(200).json({ game });
   }
 
-  return errorHandler(ErrorType.GAME_DOES_NOT_EXIST_OR_FINISHED, res);
+  return errorHandler(ErrorType.FINISHED, res);
 };
 
 /**
