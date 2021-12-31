@@ -11,6 +11,32 @@ import axios from 'axios';
 import { TGame } from '@/models/game';
 import { PublicQuestion } from '@/models/question';
 import { TQuestionary } from '@/models/questionary';
+import styled, { css } from 'styled-components';
+import { Theme } from '../../utils/theme';
+
+const GameSummaryBtn = styled.button`
+  background-color: ${Theme.color.primary};
+  border: none;
+  color: white;
+  padding: 1rem;
+  margin: 1rem;
+  margin-bottom: 0;
+
+  @keyframes glow {
+    from {
+      background-color: ${Theme.color.primaryLight};
+    }
+
+    to {
+      background-color: ${Theme.color.primary};
+    }
+  }
+  ${(props: { clicked: boolean }) =>
+    !props.clicked &&
+    css`
+      animation: glow 1s infinite;
+    `}
+`;
 
 const Game = () => {
   const router = useRouter();
@@ -57,7 +83,6 @@ const Game = () => {
 
   const gameOver = () => {
     setGameOverFlag(true);
-    console.log(`game over`);
   };
 
   // get questionnaire
@@ -96,11 +121,16 @@ const Game = () => {
 
   return (
     <TriviaMainContainer subtitle={`Game`}>
-      {gameOverFlag && (
-        <button onClick={() => getGameSummary()}> Game Summary</button>
-      )}
       {questionary && <Questionary {...questionary} startGame={startGame} />}
       {!loadingGame && game && <TriviaGame {...game} gameOver={gameOver} />}
+      {gameOverFlag && (
+        <GameSummaryBtn
+          onClick={() => getGameSummary()}
+          clicked={summary !== null}
+        >
+          Game Summary
+        </GameSummaryBtn>
+      )}
       {questions && game && (
         <QuestionArray
           questions={questions}
