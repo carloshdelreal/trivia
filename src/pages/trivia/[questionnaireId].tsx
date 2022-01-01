@@ -65,7 +65,7 @@ const Game = () => {
         });
         setGame(data.game);
       } catch (error) {
-        console.error(error.message);
+        console.error(error);
       }
       setLoadingGame(false);
     })();
@@ -78,7 +78,7 @@ const Game = () => {
       setSummary(data.game);
       setGame(data.game);
     } catch (error) {
-      console.error(error.message);
+      console.error(error);
     }
   };
 
@@ -92,7 +92,7 @@ const Game = () => {
       await axios.delete(`/api/game/${game.id}`);
       gameOver();
     } catch (error) {
-      console.error(error.message);
+      console.error(error);
     }
   };
 
@@ -107,7 +107,7 @@ const Game = () => {
         );
         setQuestionary(data);
       } catch (error) {
-        console.error(error.message);
+        console.error(error);
       }
       setLoadingQuestionary(false);
     })();
@@ -122,7 +122,7 @@ const Game = () => {
         const { data } = await axios.get(`/api/questions/${questionnaireId}`);
         setQuestions(data.questions);
       } catch (error) {
-        console.error(error.message);
+        console.error(error);
       }
       setLoadingQuestions(false);
     })();

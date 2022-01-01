@@ -51,6 +51,17 @@ export class QuestionsModel {
           `yangtze river`,
         ]),
       },
+      '444': {
+        id: `444`,
+        type: QuestionType.SINGLE_CHOICE,
+        question: `What of the following is used in React.js to increase performance?`,
+        correctAnswer: `Virtual DOM`,
+        choices: JSON.stringify([
+          `Original DOM`,
+          `Virtual DOM`,
+          `None of the above.`,
+        ]),
+      },
     };
   }
 

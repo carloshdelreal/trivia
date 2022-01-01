@@ -28,7 +28,7 @@ export const Questionnaires = () => {
         );
         setQuestionnaires(data.questionnaires);
       } catch (error) {
-        console.error(error.message);
+        console.error(error);
       }
       setLoading(false);
     })();

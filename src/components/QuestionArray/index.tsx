@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Theme } from '../../utils/theme';
 import { QuestionComponent } from '../QuestionComponent';
 import { Answer, TGame } from '@/models/game';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 const QuestionArrayContainer = styled.div`
   padding: 1rem;
@@ -83,7 +83,7 @@ export const QuestionArray: React.FC<IQuestionArray> = ({
         }, {} as Record<string, Answer>),
       );
     } catch (error) {
-      console.error(error.message);
+      console.error(error);
     }
     setSubmitingAnswers(false);
   };
