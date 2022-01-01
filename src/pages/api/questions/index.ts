@@ -1,4 +1,4 @@
-import { handleGetQuestions } from '@/handlers/question';
+import { handleGetQuestionsAll } from '@/handlers/question';
 import { errorHandler, ErrorType } from '@/utils/errors';
 import type { NextApiRequest, NextApiResponse } from 'next';
 

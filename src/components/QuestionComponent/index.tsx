@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { PublicQuestion } from '@/models/question';
 import styled, { css } from 'styled-components';
 import { Theme } from '../../utils/theme';

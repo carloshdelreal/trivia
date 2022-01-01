@@ -1,5 +1,4 @@
 import { TQuestionary } from '@/models/questionary';
-import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 import { Theme } from '../../utils/theme';

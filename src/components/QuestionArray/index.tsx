@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Theme } from '../../utils/theme';
 import { QuestionComponent } from '../QuestionComponent';
 import { Answer, TGame } from '@/models/game';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 const QuestionArrayContainer = styled.div`
   padding: 1rem;

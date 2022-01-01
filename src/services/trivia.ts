@@ -66,8 +66,16 @@ class Trivia {
     return null;
   }
 
-  createQuestionary(questions: string[], subject: string[]): TQuestionary {
-    return Questionary.getInstance().createQuestionary(questions, subject);
+  createQuestionary(
+    questions: string[],
+    subject: string[],
+    name: string,
+  ): TQuestionary {
+    return Questionary.getInstance().createQuestionary(
+      questions,
+      subject,
+      name,
+    );
   }
 
   addQuestion(questionaryId: string, questionId: string): TQuestionary | null {

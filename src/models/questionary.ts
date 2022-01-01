@@ -64,12 +64,17 @@ export class Questionary {
     return this.questionnaires[id];
   }
 
-  createQuestionary(questions: string[], subject: string[]): TQuestionary {
+  createQuestionary(
+    questions: string[],
+    subject: string[],
+    name: string,
+  ): TQuestionary {
     const id = guid();
     this.questionnaires[id] = {
       id,
       questions,
       subject,
+      name,
     };
 
     return this.questionnaires[id];
