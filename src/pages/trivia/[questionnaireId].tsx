@@ -84,6 +84,7 @@ const Game = () => {
 
   const gameOver = () => {
     setGameOverFlag(true);
+    getGameSummary();
   };
 
   const endGame = async () => {

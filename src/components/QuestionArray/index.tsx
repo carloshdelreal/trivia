@@ -88,6 +88,11 @@ export const QuestionArray: React.FC<IQuestionArray> = ({
     setSubmitingAnswers(false);
   };
 
+  const submitAndEnd = async () => {
+    await submitAnswers();
+    endGame();
+  };
+
   // Clear answers after game start
   useEffect(() => {
     if (!gameOverFlag) {
@@ -128,7 +133,9 @@ export const QuestionArray: React.FC<IQuestionArray> = ({
               Submit Questions
             </ButtonPrimary>
           )}
-          <ButtonSecondary onClick={() => endGame()}>End Game</ButtonSecondary>
+          <ButtonSecondary onClick={() => submitAndEnd()}>
+            End Game
+          </ButtonSecondary>
         </ButtonContainer>
       )}
     </QuestionArrayContainer>
