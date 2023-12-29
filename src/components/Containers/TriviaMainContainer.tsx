@@ -38,7 +38,7 @@ export const TriviaMainContainer: React.FC<TMC> = ({ children, subtitle }) => {
   return (
     <MainContainer>
       <TopHeading />
-      <GameTitle onClick={() => router.push(`/trivia`)}>Trivia</GameTitle>
+      <GameTitle onClick={() => router.push(`/`)}>Trivia</GameTitle>
       <Subtitle>{subtitle}</Subtitle>
       {children}
       <Footer> Developed by: Carlos Del Real </Footer>
