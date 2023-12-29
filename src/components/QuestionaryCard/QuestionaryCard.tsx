@@ -52,7 +52,7 @@ export const QuestionaryCard: React.FC<TQuestionary> = ({
   const router = useRouter();
 
   const goToGame = async (game_id: string) => {
-    await router.push(`trivia/${game_id}`);
+    await router.push(`/${game_id}`);
   };
 
   return (

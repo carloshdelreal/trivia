@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { TQuestionary } from '@/models/questionary';
-import { QuestionaryCard, Spinner, Subtitle } from '@/components';
+import { QuestionaryCard, Spinner } from '@/components';
 import styled from 'styled-components';
 import { TriviaMainContainer } from '@/components';
 

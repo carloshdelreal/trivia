@@ -12,7 +12,7 @@ import { TGame } from '@/models/game';
 import { PublicQuestion } from '@/models/question';
 import { TQuestionary } from '@/models/questionary';
 import styled, { css } from 'styled-components';
-import { Theme } from '../../utils/theme';
+import { Theme } from '../utils/theme';
 
 const GameSummaryBtn = styled.button`
   background-color: ${Theme.color.primary};
